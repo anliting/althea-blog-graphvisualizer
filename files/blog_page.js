@@ -21,6 +21,4 @@ async function plugin(div){
     await load()
     graphvisualize_all(div)
 }
-export default blog=>{
-    blog.addPagePlugin(plugin)
-}
+export default plugin
