@@ -1,4 +1,4 @@
-import{dom,moduleLoader}from'/lib/core.static.js'
+import{dom,load as coreLoad}from'/lib/core.static.js'
 let
     url='https://gitcdn.link/cdn/anliting/graphvisualizer/a2c8418417d9a07e2f69a19c1b8cb9eb1bdd26dc/src',
     Graph,
@@ -7,7 +7,7 @@ function load(){
     if(loaded)
         return loaded
     return loaded=(async()=>{
-        let module=await moduleLoader()
+        let module=await coreLoad.module()
         await Promise.all([
             (async()=>{
                 Graph=await module.moduleByPath(`${url}/Graph.js`)
