@@ -1,6 +1,7 @@
 import{dom,moduleLoader}from'/lib/core.static.js'
 let
-    url='https://gitcdn.link/cdn/anliting/graphvisualizer/9f7c4b53cf2d24e1362dc609b63816238ac2fa88',
+    url='https://gitcdn.link/cdn/anliting/graphvisualizer/a2c8418417d9a07e2f69a19c1b8cb9eb1bdd26dc/src',
+    Graph,
     loaded
 function load(){
     if(loaded)
@@ -8,7 +9,9 @@ function load(){
     return loaded=(async()=>{
         let module=await moduleLoader()
         await Promise.all([
-            module.scriptByPath(`${url}/visualizer.js`),
+            (async()=>{
+                Graph=await module.moduleByPath(`${url}/Graph.js`)
+            })(),
             (async()=>{
                 dom.head(dom.style(
                     await module.get(`${url}/visualizer.css`)
@@ -18,7 +21,12 @@ function load(){
     })()
 }
 async function plugin(div){
+    let a=[...div.getElementsByClassName('graphvisualizer')]
+    if(!a.length)
+        return
     await load()
-    graphvisualize_all(div)
+    a.forEach(e=>{
+        Graph.visualize(e)
+    })
 }
 export default plugin
