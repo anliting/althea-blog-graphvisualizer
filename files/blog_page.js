@@ -7,12 +7,12 @@ function load(){
     if(loaded)
         return loaded
     return loaded=(async()=>{
-        let module=await coreLoad.module()
         await Promise.all([
             (async()=>{
-                Graph=await module.moduleByPath(`${url}/Graph.js`)
+                Graph=(await import(`${url}/Graph.js`)).default
             })(),
             (async()=>{
+                let module=await coreLoad.module()
                 dom.head(dom.style(
                     await module.get(`${url}/visualizer.css`)
                 ))
@@ -25,8 +25,8 @@ async function plugin(div){
     if(!a.length)
         return
     await load()
-    a.forEach(e=>{
+    a.forEach(e=>
         Graph.visualize(e)
-    })
+    )
 }
 export default plugin
