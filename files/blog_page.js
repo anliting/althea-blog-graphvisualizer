@@ -1,4 +1,4 @@
-import{dom,load as coreLoad}from'/lib/core.static.js'
+import{doe,load as coreLoad}from'/lib/core.static.js'
 let
     url='https://gitcdn.link/cdn/anliting/graphvisualizer/a2c8418417d9a07e2f69a19c1b8cb9eb1bdd26dc/src',
     Graph,
@@ -13,7 +13,7 @@ function load(){
             })(),
             (async()=>{
                 let module=await coreLoad.module()
-                dom.head(dom.style(
+                doe.head(doe.style(
                     await module.get(`${url}/visualizer.css`)
                 ))
             })(),
