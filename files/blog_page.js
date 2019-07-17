@@ -12,9 +12,8 @@ function load(){
                 Graph=(await import(`${url}/Graph.js`)).default
             })(),
             (async()=>{
-                let module=await coreLoad.module()
                 doe.head(doe.style(
-                    await module.get(`${url}/visualizer.css`)
+                    await(await fetch(`${url}/visualizer.css`)).text()
                 ))
             })(),
         ])
